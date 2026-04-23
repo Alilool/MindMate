@@ -33,7 +33,7 @@ const winnerMenu = document.getElementById("winner-menu");
 const playAgainBtn = document.getElementById("play-again-btn");
 const closeBtn = document.getElementById("close-btn");
 const winnerMessageContainer = document.getElementById(
-  "winner-message-container"
+  "winner-message-container",
 );
 const winnerMessage = document.getElementById("winner-message");
 const winnerHeading = document.getElementById("winner-heading");
@@ -77,8 +77,8 @@ let theme = localStorage.getItem("theme")
 function getBotMove() {
   fetch(
     `https://stockfish.online/api/s/v2.php?fen=${encodeURIComponent(
-      game.fen()
-    )}&depth=${depthArr[getRandomInt(0, depthArr.length - 1)]}`
+      game.fen(),
+    )}&depth=${depthArr[getRandomInt(0, depthArr.length - 1)]}`,
   )
     .then((res) => res.json())
     .then((data) => {
@@ -389,7 +389,7 @@ document.addEventListener(
       event.preventDefault(); // Prevent scrolling when touching the chessboard
     }
   },
-  { passive: false }
+  { passive: false },
 );
 
 notation.addEventListener("change", () => {
@@ -517,12 +517,12 @@ function showLastMove() {
   let target = lastMove[lastMove.length - 1].to;
   if (source && target) {
     document.getElementsByClassName(
-      `square-${target}`
+      `square-${target}`,
     )[0].style.backgroundImage =
       "linear-gradient(rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.3)";
 
     document.getElementsByClassName(
-      `square-${source}`
+      `square-${source}`,
     )[0].style.backgroundImage =
       "linear-gradient(rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.3))";
   }
