@@ -63,7 +63,10 @@
         "@type": "VideoGame",
         "name": "MindMate",
         "url": "https://alilool.github.io/MindMate/",
-        "author": { "@type": "Person", "name": "Ali Elsayed" },
+        "author": {
+          "@type": "Person",
+          "name": "Ali Elsayed"
+        },
         "description": "MindMate is a 2-player interactive online chess game where players can challenge friends and sharpen tactics.",
         "genre": "Strategy",
         "applicationCategory": "GameApplication",
@@ -75,6 +78,7 @@
     <!-- ================= LIBRARIES ================= -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/chessboard-1.0.0.js"></script>
+
     <link rel="stylesheet" href="./css/chessboard-1.0.0.css" />
     <link rel="stylesheet" href="style.css" />
 
@@ -87,7 +91,7 @@
   </head>
 
   <body>
-    <!-- ================= MAIN APP ================= -->
+    <!-- ================= MAIN CONTAINER ================= -->
     <div class="container">
       <!-- ================= BOARD ================= -->
       <div class="board-container">
@@ -95,7 +99,7 @@
         <div id="board" aria-label="Chess board"></div>
       </div>
 
-      <!-- ================= Statues ================= -->
+      <!-- ================= RIGHT PANEL ================= -->
       <div>
         <!-- STATUS -->
         <div id="status" aria-live="polite">
@@ -104,103 +108,186 @@
 
         <!-- CONTROLS -->
         <div>
-          <button id="reset" class="control">Reset</button>
-          <button id="undo" class="control">Undo</button>
+          <button id="reset" class="control" aria-label="Reset game">
+            Reset
+          </button>
+          <button id="undo" class="control" aria-label="Undo last move">
+            Undo
+          </button>
         </div>
 
-        <button id="settings-btn" class="control">Options</button>
+        <button id="settings-btn" class="control" aria-label="Open Options">
+          Options
+        </button>
 
         <!-- ================= SETTINGS ================= -->
-        <div id="settings-menu" class="settings-menu" role="dialog">
+        <div
+          id="settings-menu"
+          class="settings-menu"
+          role="dialog"
+          aria-labelledby="settings-heading"
+        >
           <h2 id="settings-heading">Settings</h2>
 
           <div class="checkbox-container">
             <label for="notation">Show notation:</label>
-            <input id="notation" type="checkbox" />
+            <input
+              name="notation"
+              id="notation"
+              type="checkbox"
+              aria-label="Show chess notation"
+            />
           </div>
 
           <div class="checkbox-container">
             <label for="freeMove">Move freely:</label>
-            <input id="freeMove" type="checkbox" />
+            <input
+              name="freeMove"
+              id="freeMove"
+              type="checkbox"
+              aria-label="Enable free movement"
+            />
           </div>
 
           <div class="checkbox-container">
             <label for="flipBoard">Flip board each turn:</label>
-            <input id="flipBoard" type="checkbox" />
+            <input
+              name="flipBoard"
+              id="flipBoard"
+              type="checkbox"
+              aria-label="Flip board on each turn"
+            />
           </div>
 
           <div class="checkbox-container">
             <label for="PlayWithAI">Play with AI:</label>
-            <input id="PlayWithAI" type="checkbox" />
+            <input
+              name="PlayWithAI"
+              id="PlayWithAI"
+              type="checkbox"
+              aria-label="Play with AI"
+            />
           </div>
 
           <p id="copy-fen">Fen Copied</p>
 
-          <button id="close-settings-btn" class="control">Close</button>
-          <button id="copy-fen-btn" class="control">Copy fen</button>
-          <button id="change-theme-btn" class="control">Change Theme</button>
+          <button
+            id="close-settings-btn"
+            class="control"
+            aria-label="Close settings"
+            style="margin-right: 5px; margin-top: 0px"
+          >
+            Close
+          </button>
+
+          <button
+            id="copy-fen-btn"
+            class="control"
+            aria-label="Copy fen"
+            style="margin-left: 5px; margin-top: 0px"
+          >
+            Copy fen
+          </button>
+
+          <button
+            id="change-theme-btn"
+            class="control"
+            aria-label="Change Theme"
+            style="margin-left: 5px; margin-top: 10px"
+          >
+            Change Theme
+          </button>
         </div>
 
-        <!-- ================= THEME MENU ================= -->
+        <!-- ================= THEMES ================= -->
         <div class="menu" id="chooseTheme">
           <h2>Choose Board Theme</h2>
 
           <div id="theme-container">
             <div class="theme">
               <p>Glass</p>
-              <img src="./img/themes/glass.png" />
+              <img src="./img/themes/glass.png" alt="Glass Theme" />
             </div>
             <div class="theme">
               <p>Blue</p>
-              <img src="./img/themes/blue.png" />
+              <img src="./img/themes/blue.png" alt="Blue Theme" />
             </div>
             <div class="theme">
               <p>Green</p>
-              <img src="./img/themes/green.png" />
+              <img src="./img/themes/green.png" alt="Green Theme" />
             </div>
             <div class="theme">
               <p>Brown</p>
-              <img src="./img/themes/brown.png" />
+              <img src="./img/themes/brown.png" alt="Brown Theme" />
             </div>
             <div class="theme">
               <p>Red</p>
-              <img src="./img/themes/red.png" />
+              <img src="./img/themes/red.png" alt="Red Theme" />
             </div>
             <div class="theme">
               <p>Pink</p>
-              <img src="./img/themes/pink.png" />
+              <img src="./img/themes/pink.png" alt="Pink Theme" />
             </div>
           </div>
         </div>
 
-        <!-- ================= WINNER MENU ================= -->
-        <div id="winner-menu" class="menu" role="dialog">
+        <!-- ================= WINNER ================= -->
+        <div
+          id="winner-menu"
+          class="menu"
+          role="dialog"
+          aria-labelledby="winner-heading"
+        >
           <div id="winner-message-container">
             <h2 id="winner-heading">Game Over</h2>
             <p id="winner-message">Checkmate! Black wins</p>
           </div>
 
-          <button id="play-again-btn" class="control">Play Again</button>
-          <button id="close-btn" class="control">Close</button>
+          <button id="play-again-btn" class="control" aria-label="Play again">
+            Play Again
+          </button>
+          <button id="close-btn" class="control" aria-label="Exit game">
+            Close
+          </button>
         </div>
 
-        <!-- ================= RETURN GAME ================= -->
-        <div id="returnLastGame" class="menu">
-          <h2>Do you want to return the last game?</h2>
-          <button id="yes" class="control">Yes</button>
-          <button id="no" class="control">No</button>
+        <!-- ================= RETURN LAST GAME ================= -->
+        <div
+          id="returnLastGame"
+          class="menu"
+          role="dialog"
+          aria-labelledby="return-heading"
+        >
+          <h2 id="return-heading">Do you want to return the last game?</h2>
+
+          <button id="yes" class="control" aria-label="Return to last game">
+            Yes
+          </button>
+          <button id="no" class="control" aria-label="Start a new game">
+            No
+          </button>
         </div>
 
-        <!-- ================= RESET MENU ================= -->
+        <!-- ================= RESET ================= -->
         <div id="reset-menu" class="menu">
           <h2>Are you sure you want to reset the game?</h2>
-          <button id="reset-yes" class="control">Yes</button>
-          <button id="reset-no" class="control">No</button>
+
+          <button id="reset-yes" class="control" aria-label="Reset game">
+            Yes
+          </button>
+          <button id="reset-no" class="control" aria-label="Cancel reset">
+            No
+          </button>
         </div>
 
         <!-- ================= WELCOME ================= -->
-        <div id="welcome" class="menu">
-          <h2>Welcome to MindMate</h2>
+        <div
+          id="welcome"
+          class="menu"
+          role="dialog"
+          aria-labelledby="welcome-heading"
+        >
+          <h2 id="welcome-heading">Welcome to MindMate</h2>
 
           <p>
             Sharpen your tactics and challenge a friend or an AI in this classic
@@ -211,17 +298,32 @@
 
           <div>
             <label for="hideWelcome">Don't show this again:</label>
-            <input type="checkbox" id="hideWelcome" />
+            <input
+              type="checkbox"
+              id="hideWelcome"
+              aria-label="Hide welcome screen on future visits"
+            />
           </div>
 
-          <button id="start-pvp" class="control">Player vs Player</button>
-          <button id="start-pvb" class="control">Player vs Bot</button>
+          <button id="start-pvp" class="control" aria-label="Player vs Player">
+            Player vs Player
+          </button>
+
+          <button id="start-pvb" class="control" aria-label="Player vs Bot">
+            Player vs Bot
+          </button>
         </div>
 
-        <!-- CREDIT -->
+        <!-- ================= CREDIT ================= -->
         <p id="credit">
           Created by:
-          <a href="https://github.com/Alilool" target="_blank">Ali Elsayed</a>
+          <a
+            href="https://github.com/Alilool"
+            target="_blank"
+            aria-label="Visit Ali Elsayed's GitHub page"
+          >
+            Ali Elsayed
+          </a>
         </p>
       </div>
     </div>
@@ -236,44 +338,23 @@
     </div>
 
     <!-- ================= PROMOTION ================= -->
-
     <div id="promotion-menu" class="Choose-menu">
       <h2>Promotion</h2>
 
-      <button
-        class="Choose-btn promo-btn"
-        data-piece="q"
-        aria-label="Promote to Queen"
-      >
-        ♛ Queen
-      </button>
-      <button
-        class="Choose-btn promo-btn"
-        data-piece="r"
-        aria-label="Promote to Rook"
-      >
-        ♜ Rook
-      </button>
-      <button
-        class="Choose-btn promo-btn"
-        data-piece="b"
-        aria-label="Promote to Bishop"
-      >
-        ♝ Bishop
-      </button>
-      <button
-        class="Choose-btn promo-btn"
-        data-piece="n"
-        aria-label="Promote to Knight"
-      >
-        ♞ Knight
-      </button>
+      <button class="Choose-btn promo-btn" data-piece="q">♛ Queen</button>
+      <button class="Choose-btn promo-btn" data-piece="r">♜ Rook</button>
+      <button class="Choose-btn promo-btn" data-piece="b">♝ Bishop</button>
+      <button class="Choose-btn promo-btn" data-piece="n">♞ Knight</button>
     </div>
 
     <!-- ================= AUDIO ================= -->
-    <audio id="checkmateAudio" src="./sounds/checkmate.mp3"></audio>
-    <audio id="moveAudio" src="./sounds/moveSFX.mp3"></audio>
-    <audio id="killAudio" src="./sounds/killSFX.mp3"></audio>
+    <audio
+      id="checkmateAudio"
+      src="./sounds/checkmate.mp3"
+      aria-hidden="true"
+    ></audio>
+    <audio id="moveAudio" src="./sounds/moveSFX.mp3" aria-hidden="true"></audio>
+    <audio id="killAudio" src="./sounds/killSFX.mp3" aria-hidden="true"></audio>
 
     <!-- ================= SCRIPTS ================= -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
